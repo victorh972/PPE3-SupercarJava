@@ -1,3 +1,5 @@
+package supercarjava;
+
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import java.awt.Font;
@@ -76,8 +78,7 @@ public class adduser extends JFrame {
 					PreparedStatement st = conn
 							.prepareStatement("insert into users (role,email,password) values (?,?,?)");
 					st.setInt(1, comboBox.getSelectedIndex());
-					st.setString(2, textField.getText());
-					st.setString(3, AES256.encrypt(passwordField.getText()));
+					
 					st.execute();
 					// adc.setVisible(true);
 					// ac.dispose();

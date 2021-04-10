@@ -1,3 +1,5 @@
+package supercarjava;
+
 import java.awt.Color;
 
 import javax.swing.JFrame;

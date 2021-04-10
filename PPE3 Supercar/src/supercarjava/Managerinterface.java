@@ -1,6 +1,5 @@
 package supercarjava;
 
-
 import java.awt.Color;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
