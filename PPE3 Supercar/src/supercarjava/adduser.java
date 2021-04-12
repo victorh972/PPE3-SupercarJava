@@ -62,6 +62,7 @@ public class adduser extends JFrame {
 		textField.setColumns(10);
 
 		JButton btnNewButton = new JButton("Ajouter");
+		btnNewButton.setForeground(Color.WHITE);
 		btnNewButton.setBackground(new Color(60, 24, 116));
 		btnNewButton.setBorderPainted(false);
 		btnNewButton.setBounds(170, 286, 96, 21);
