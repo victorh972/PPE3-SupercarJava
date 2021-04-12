@@ -79,7 +79,7 @@ public class confirmliv extends JFrame {
 					System.out.println("error");
 				}
 				try {
-					conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/supercar", "root", "");
+					conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/supercarjava", "root", "");
 					PreparedStatement st3 = conn.prepareStatement("update commande set finished=true where id=?");
 					st3.setInt(1, id);
 					st3.executeUpdate();
