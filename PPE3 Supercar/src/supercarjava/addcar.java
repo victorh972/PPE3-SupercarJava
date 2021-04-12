@@ -22,22 +22,23 @@ public class addcar extends JFrame {
 	private JTextField textField_1;
 	static Connection conn = null;
 	static Statement st = null;
+	private JTextField textField_2;
 
 	public addcar() {
 		getContentPane().setBackground(new Color(36, 37, 130));
 		getContentPane().setLayout(null);
 		this.setBounds(100, 100, 400, 300);
-		JLabel lblNewLabel = new JLabel("Mod\u00E8le");
+		JLabel lblNewLabel = new JLabel("Marque");
 		lblNewLabel.setForeground(Color.WHITE);
 		lblNewLabel.setBackground(Color.WHITE);
 		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 13));
-		lblNewLabel.setBounds(73, 56, 61, 13);
+		lblNewLabel.setBounds(73, 55, 61, 13);
 		getContentPane().add(lblNewLabel);
 
 		JLabel lblNewLabel_1 = new JLabel("Couleur");
 		lblNewLabel_1.setForeground(Color.WHITE);
 		lblNewLabel_1.setFont(new Font("Tahoma", Font.BOLD, 13));
-		lblNewLabel_1.setBounds(73, 121, 61, 13);
+		lblNewLabel_1.setBounds(73, 144, 61, 13);
 		getContentPane().add(lblNewLabel_1);
 
 		textField = new JTextField();
@@ -46,7 +47,7 @@ public class addcar extends JFrame {
 		textField.setColumns(10);
 
 		textField_1 = new JTextField();
-		textField_1.setBounds(158, 118, 96, 19);
+		textField_1.setBounds(158, 142, 96, 19);
 		getContentPane().add(textField_1);
 		textField_1.setColumns(10);
 
@@ -63,10 +64,12 @@ public class addcar extends JFrame {
 					System.out.println("error");
 				}
 				try {
-					conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/supercarjava", "root", "");
-					PreparedStatement st = conn.prepareStatement("insert into voiture (couleur,modéle) values (?,?)");
+					conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/supercar", "root", "");
+					PreparedStatement st = conn
+							.prepareStatement("insert into voiture (couleur,modele,marque) values (?,?,?)");
 					st.setString(1, textField_1.getText());
-					st.setString(2, textField.getText());
+					st.setString(3, textField.getText());
+					st.setString(2, textField_2.getText());
 					st.execute();
 					adc.setVisible(true);
 					ac.dispose();
@@ -75,13 +78,23 @@ public class addcar extends JFrame {
 				}
 			}
 		});
-		btnNewButton.setBounds(127, 181, 110, 21);
+		btnNewButton.setBounds(127, 205, 110, 21);
 		getContentPane().add(btnNewButton);
+
+		textField_2 = new JTextField();
+		textField_2.setBounds(158, 101, 96, 19);
+		getContentPane().add(textField_2);
+		textField_2.setColumns(10);
+
+		JLabel lblNewLabel_2 = new JLabel("Mod\u00E9le");
+		lblNewLabel_2.setForeground(Color.WHITE);
+		lblNewLabel_2.setFont(new Font("Tahoma", Font.BOLD, 13));
+		lblNewLabel_2.setBounds(73, 104, 61, 13);
+		getContentPane().add(lblNewLabel_2);
 	}
 
 	public static void main(String[] args) {
 		addcar adc = new addcar();
 		adc.setVisible(true);
 	}
-
 }
