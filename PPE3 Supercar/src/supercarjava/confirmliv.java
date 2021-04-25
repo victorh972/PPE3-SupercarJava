@@ -15,12 +15,19 @@ import javax.swing.Action;
 import javax.swing.JFrame;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
-
+/**
+ * La classe confirmliv (confirmer livraison) permet d'update le statut de la commande qui passera de false à true ce qui signifie que la commande
+ * aura bien été livrée.
+ *
+ */
 public class confirmliv extends JFrame {
 	static Connection conn = null;
 	static Statement st = null;
 	ArrayList<ArrayList<String>> array = new ArrayList<ArrayList<String>>();
-
+	/**
+	 * Initialisation de la fenêtre confirmliv
+	 *
+	 */
 	public confirmliv() {
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
@@ -57,17 +64,23 @@ public class confirmliv extends JFrame {
 		String[] columnNames = { "id", "voiture", "quantité", "" };
 
 		// initialiser le JTable
-		JTable j = new JTable(data, columnNames);
-		j.setBounds(30, 40, 200, 300);
+		JTable AffichageTableauLivraisonEnCours = new JTable(data, columnNames);
+		AffichageTableauLivraisonEnCours.setBounds(30, 40, 200, 300);
 
 		// l'ajouter a JScrollPane
-		JScrollPane sp = new JScrollPane(j);
-		this.add(sp);
+		JScrollPane ScrollbarrePanel = new JScrollPane(AffichageTableauLivraisonEnCours);
+		getContentPane().add(ScrollbarrePanel);
 		// taille de la frame
 		this.setSize(500, 200);
 		// Frame Visible = true
 		this.setVisible(true);
 		Action delete = new AbstractAction() {
+			/**
+			 * Lorsque l'utilisateur appuiera sur le bouton "confirmer", cela aura pour effet d'update le champs finished de la base de données
+			 * qui passera de false à true. True étant la valeur pour dire que la commande a bien été livrée et false la valeur pour signifier
+			 * que la livraison est en cours.
+			 * 
+			 */
 			public void actionPerformed(ActionEvent e) {
 				JTable table = (JTable) e.getSource();
 				int modelRow = Integer.valueOf(e.getActionCommand());
@@ -88,10 +101,13 @@ public class confirmliv extends JFrame {
 				}
 			}
 		};
-		ButtonColumn buttonColumn = new ButtonColumn(j, delete, 3);
+		ButtonColumn buttonColumn = new ButtonColumn(AffichageTableauLivraisonEnCours, delete, 3);
 		buttonColumn.setMnemonic(KeyEvent.VK_D);
 	}
-
+	/**
+	 * Permet d'exécuter la classe confirmliv lorsque celle-ci est appelée. 
+	 *
+	 */
 	public static void main(String[] args) {
 		confirmliv rct = new confirmliv();
 		rct.setVisible(true);

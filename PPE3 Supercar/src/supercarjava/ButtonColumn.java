@@ -1,4 +1,4 @@
-package supercarjava;
+ package supercarjava;
 
 import java.awt.*;
 import java.awt.event.*;
@@ -13,13 +13,12 @@ import javax.swing.table.*;
  *
  * Le bouton peut être appelé par un clic de souris ou en appuyant sur la barre d'espace lorsque
  * la cellule a le focus. En option, un mnémonique peut être défini pour appeler le bouton.
- * Lorsque le bouton est appelé, l'action fournie est appelée. La source de la
- * L'action sera la table. La commande d'action contiendra la ligne de modèle
- * numéro du bouton sur lequel vous avez cliqué.
+ * Lorsque le bouton est appelé, l'action fournie est appelée. La source de l'action sera la table. 
+ * La commande d'action contiendra la ligne de modèle du numéro du bouton sur lequel vous avez cliqué.
  *
  */
 public class ButtonColumn extends AbstractCellEditor
-		implements TableCellRenderer, TableCellEditor, ActionListener, MouseListener {
+	implements TableCellRenderer, TableCellEditor, ActionListener, MouseListener {
 	private JTable table;
 	private Action action;
 	private int mnemonic;
@@ -32,9 +31,8 @@ public class ButtonColumn extends AbstractCellEditor
 	private boolean isButtonColumnEditor;
 
 	/**
-	 * Créez le ButtonColumn à utiliser comme moteur de rendu et éditeur. Le moteur de rendu et
-	 * l'éditeur sera automatiquement installé sur la TableColumn du spécifié
-	 * colonne.
+	 * Crée le ButtonColumn à utiliser comme moteur de rendu et éditeur. Le moteur de rendu et
+	 * l'éditeur seront automatiquement installés sur la TableColumn de la colonne spécifiée.
 	 *
 	 * @param table la table contenant le rendu / éditeur de bouton
 	 * @param action l'Action à invoquer lorsque le bouton est appelé
@@ -58,7 +56,7 @@ public class ButtonColumn extends AbstractCellEditor
 	}
 
 	/**
-	 * Obtenir la couleur de premier plan du bouton lorsque la cellule a le focus
+	 * Obtenir la couleur de premier plan du bouton lorsque la cellule a le focus.
 	 *
 	 * @return la couleur de premier plan
 	 */
@@ -75,13 +73,13 @@ public class ButtonColumn extends AbstractCellEditor
 		this.focusBorder = focusBorder;
 		editButton.setBorder(focusBorder);
 	}
-
+	
 	public int getMnemonic() {
 		return mnemonic;
 	}
 
 	/**
-	 * le mnémonique pour activer le bouton lorsque la cellule a le focus
+	 * Le mnémonique pour activer le bouton lorsque la cellule a le focus.
 	 *
 	 * @param mnémonique le mnémonique
 	 */
@@ -151,7 +149,11 @@ public class ButtonColumn extends AbstractCellEditor
 //  Implement ActionListener interface
 //
 	/*
-	 * Le bouton a été enfoncé. Arrêtez l'édition et appelez l'action personnalisée
+	 * Le bouton a été enfoncé. Arrêtez l'édition et appelez l'action personnalisée.
+	 */
+	/***
+	 * 
+	 * Le bouton a été enfoncé. Arrêtez l'édition et appelez l'action personnalisée.
 	 */
 	public void actionPerformed(ActionEvent e) {
 		int row = table.convertRowIndexToModel(table.getEditingRow());
@@ -166,11 +168,12 @@ public class ButtonColumn extends AbstractCellEditor
 //
 //  Implement MouseListener interface
 //
-	/*
+	/**
 	 * Lorsque la souris est enfoncée, l'éditeur est appelé. Si vous faites ensuite glisser la
-	 * souris vers une autre cellule avant de la relâcher, l'éditeur est toujours actif. être
+	 * souris vers une autre cellule avant de la relâcher, l'éditeur est toujours actif. Etre
 	 * sûr que l'édition est arrêtée lorsque la souris est relâchée.
 	 */
+	
 	public void mousePressed(MouseEvent e) {
 		if (table.isEditing() && table.getCellEditor() == this)
 			isButtonColumnEditor = true;

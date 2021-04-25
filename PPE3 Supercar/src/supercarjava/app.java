@@ -1,5 +1,6 @@
 package supercarjava;
 
+
 import java.awt.Color;
 import java.awt.EventQueue;
 import java.io.IOException;
@@ -30,6 +31,13 @@ import java.sql.Statement;
 import java.awt.event.ActionEvent;
 import javax.swing.JPasswordField;
 
+/********************************************************************
+ * Application permettant la gestion des ventes de voiture, d'approvisionnement des entrepôts, 
+ * et le salaire des Ressources Humaines de l'entreprise supercar.
+ *
+ * Auteur:		Victor Huguet
+ * Date:		05 octobre 2020
+ ********************************************************************/
 public class app {
 
 	private JFrame frame;
@@ -48,7 +56,7 @@ public class app {
 	}
 
 	/**
-	 * Launch the application.
+	 * Lance l'application.
 	 */
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
@@ -64,14 +72,14 @@ public class app {
 	}
 
 	/**
-	 * Create the application.
+	 * Crée l'application
 	 */
 	public app() {
 		initialize();
 	}
 
 	/**
-	 * Initialize the contents of the frame.
+	 * Initialise le contenu de la fenêtre.
 	 */
 	void initialize() {
 		frame = new JFrame();
@@ -80,25 +88,25 @@ public class app {
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 
-		JLabel lblNewLabel = new JLabel("Email");
-		lblNewLabel.setForeground(new Color(2, 36, 73));
-		lblNewLabel.setBackground(Color.WHITE);
-		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 14));
-		lblNewLabel.setBounds(340, 254, 80, 13);
-		frame.getContentPane().add(lblNewLabel);
+		JLabel lblEmail = new JLabel("Email");
+		lblEmail.setForeground(new Color(2, 36, 73));
+		lblEmail.setBackground(Color.WHITE);
+		lblEmail.setFont(new Font("Tahoma", Font.BOLD, 14));
+		lblEmail.setBounds(340, 254, 80, 13);
+		frame.getContentPane().add(lblEmail);
 
-		JLabel lblNewLabel_1 = new JLabel("Password");
-		lblNewLabel_1.setForeground(new Color(2, 36, 73));
-		lblNewLabel_1.setFont(new Font("Tahoma", Font.BOLD, 14));
-		lblNewLabel_1.setBounds(340, 301, 80, 13);
-		frame.getContentPane().add(lblNewLabel_1);
+		JLabel lblPassword = new JLabel("Password");
+		lblPassword.setForeground(new Color(2, 36, 73));
+		lblPassword.setFont(new Font("Tahoma", Font.BOLD, 14));
+		lblPassword.setBounds(340, 301, 80, 13);
+		frame.getContentPane().add(lblPassword);
 
-		JButton btnNewButton = new JButton("Login");
-		btnNewButton.setBackground(new Color(242, 125, 66));
-		btnNewButton.setBorderPainted(false);
-		btnNewButton.setForeground(Color.WHITE);
-		btnNewButton.setBounds(415, 374, 143, 29);
-		frame.getContentPane().add(btnNewButton);
+		JButton btnlogin = new JButton("Login");
+		btnlogin.setBackground(new Color(242, 125, 66));
+		btnlogin.setBorderPainted(false);
+		btnlogin.setForeground(Color.WHITE);
+		btnlogin.setBounds(415, 374, 143, 29);
+		frame.getContentPane().add(btnlogin);
 
 		textField = new JTextField();
 		textField.setBounds(444, 253, 114, 19);
@@ -112,7 +120,13 @@ public class app {
 		Vendeurinterface vd = new Vendeurinterface();
 		Managerinterface mg = new Managerinterface();
 		RHinterface rhi = new RHinterface();
-		btnNewButton.addActionListener(new ActionListener() {
+		btnlogin.addActionListener(new ActionListener() {
+			/***
+			 * 
+			 * Lors de l'exécution du bouton "login", l'application va comparer le mail et le mot de passe associé saisi par l'utilisateur avec
+			 * celui contenu dans la base de données. Si le mot de passe et l'identifiant sont corrects l'application ouvrira l'interface
+			 * correspondant au rôle de l'utilisateur qui s'est authentifié.
+			 */
 			public void actionPerformed(ActionEvent e) {
 				try {
 					Class.forName("com.mysql.jdbc.Driver");

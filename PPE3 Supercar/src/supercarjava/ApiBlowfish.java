@@ -1,23 +1,22 @@
 package supercarjava;
+
+
+import java.security.*;
+import java.util.Base64;
+import javax.crypto.*;
+import javax.crypto.spec.SecretKeySpec;
 /********************************************************************
- * API Blowfish pour le chiffrement où déchifrement de tableau d'octets
+ * API Blowfish pour le chiffrement ou déchiffrement de tableau d'octets
  * ou de chaine de caractères
  * Auteur:		Didier Samfat
  * Date:		27 Mar 2021
  * Version:		1.0 : Traitement des byte[]
  * Version 		2.0 : Traitement des String
  ********************************************************************/
-
-import java.security.*;
-import java.util.Base64;
-import javax.crypto.*;
-import javax.crypto.spec.SecretKeySpec;
-
 public class ApiBlowfish {
 
 	/**
-	 * Génére aléatoirement une clé cryptographique Blowfish
-	 * 
+	 * Génère aléatoirement une clé cryptographique Blowfish
 	 * @return la clé ainsi crée
 	 * @throws Exception
 	 */
@@ -30,11 +29,11 @@ public class ApiBlowfish {
 	}
 
 	/**
-	 * Méthode qui peut Chiffrer n'importe qyu'elle donnée et le met en format
-	 * octets son appel dans une autre classe se fait par ApiBlowfish.generateKey()
+	 * Méthode qui peut Chiffrer n'importe qu'elle donnée et la met en format
+	 * octets. Son appel dans une autre classe se fait par ApiBlowfish.generateKey()
 	 *
-	 * @param textClair: tout type de donnés pouvant être codé em obctets
-	 * @param clef:      la clé de chifremment à utiliser
+	 * @param textClair: tout type de donnée pouvant être codé en octets
+	 * @param clef:      la clé de chiffremment à utiliser
 	 * @return : retourne le cryptage sous forme d'octets
 	 * @throws Exception
 	 */
@@ -48,7 +47,7 @@ public class ApiBlowfish {
 	}
 
 	/**
-	 * Méthode qui déchiffre les donnée déjà chiffrées son appel dans une autre
+	 * Méthode qui déchiffre les données déjà chiffrées. Son appel dans une autre
 	 * classe se fait par ApiBlowfish.decryptInByte(..)
 	 *
 	 * @param textChiffre: les octets à déchiffrer
@@ -69,8 +68,8 @@ public class ApiBlowfish {
 	}
 
 	/**
-	 * Méthode qui peut Chiffrer uniquement une chaîne de caractères son appel dans
-	 * une autre classe se fait par ApiBlowfish.encryptInString(..)
+	 * Méthode qui peut Chiffrer uniquement une chaîne de caractères. 
+	 * Son appel dans une autre classe se fait par ApiBlowfish.encryptInString(..)
 	 *
 	 * @param textClair
 	 * @param clef
@@ -89,11 +88,11 @@ public class ApiBlowfish {
 	}
 
 	/**
-	 * Méthode qui peut Chiffrer uniquement une chaîne de caractères en utiliant la
-	 * même clé que pour chiffrer on l'appel par ApiBlowfish.decryptInString(..)
+	 * Méthode qui peut Chiffrer uniquement une chaîne de caractères en utilisant la
+	 * même clé que pour chiffrer. On l'appelle par ApiBlowfish.decryptInString(..)
 	 *
 	 * @param textChiffre
-	 * @param clef        : doit être crée préalablement
+	 * @param clef        : doit être créée préalablement
 	 * @return la chaine chiffrée
 	 * @throws Exception
 	 */
@@ -108,22 +107,18 @@ public class ApiBlowfish {
 
 		return new String(dechiffre); // retourne au format chaine normal
 	}
-
-	//
-	public static Key loadkey(String a) {
+	public static Key loadkey(String a)
+	{
 		byte[] encoded = Base64.getDecoder().decode(a);
 		Key k = new SecretKeySpec(encoded, "Blowfish");
 		return k;
 	}
-
-	public static void main(String[] args) {
-		try {
-			// test de cryptage mot de passe rh
-			System.out.println(ApiBlowfish.encryptInString("rh",
-					ApiBlowfish.loadkey("8BcmVz/DWm73fUim2OQ0XVo2PnldzDD044treMjnQwY")));
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+public static void main(String[] args) {
+	try {
+		System.out.println(ApiBlowfish.encryptInString("12000", ApiBlowfish.loadkey("8BcmVz/DWm73fUim2OQ0XVo2PnldzDD044treMjnQwY")));
+	} catch (Exception e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
 	}
+}
 }

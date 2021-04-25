@@ -11,7 +11,12 @@ import java.util.ArrayList;
 import javax.swing.JFrame;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
-
+/**
+ * 
+ * La classe Ventesnonl() permet d'afficher la liste des voitures non livrées.
+ * 
+ * 
+ */
 public class Ventesnonl extends JFrame{
 	static Connection conn=null;
 	static Statement st=null;
@@ -45,7 +50,7 @@ public class Ventesnonl extends JFrame{
 		System.out.println(e2.getMessage());	
 	}
 		/*
-		 * mouchare pour vérifié si les donnée rentre correctement dans le tableau
+		 * mouchard pour vérifier si les données rentrent correctement dans le tableau
 		 * 
 		 * String[][] data = {
 	            { "Mercedes benz class", "5","cars sh", "250000" },
@@ -72,6 +77,11 @@ public class Ventesnonl extends JFrame{
 	        // Frame Visible = true
 	        this.setVisible(true);
 	}
+	/****
+	 * 
+	 * Permet de lancer la classe ventesnonl() quand celle-ci est appelée.
+	 *
+	 */
 	public static void main(String[] args)
 	{
 		Ventesnonl tct=new Ventesnonl();

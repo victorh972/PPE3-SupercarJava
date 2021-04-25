@@ -17,46 +17,62 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.Color;
 
+/**
+ * La classe addcar permet d'ajouter les voitures d'une marque et/ou d'un modèle 
+ * qui ne sont pas enregistrées dans la base de données lors d'une commande de voiture,
+ * pour renouveler le stock des entrepôts.
+ *
+ */
 public class addcar extends JFrame {
-	private JTextField textField;
-	private JTextField textField_1;
+	private JTextField textFieldMarque;
+	private JTextField textFieldCouleur;
 	static Connection conn = null;
 	static Statement st = null;
-	private JTextField textField_2;
+	private JTextField textFieldModèle;
 
+	
+	/**
+	 * Initialisation de la fenêtre d'ajout de voitures.
+	 *
+	 */
 	public addcar() {
 		getContentPane().setBackground(new Color(36, 37, 130));
 		getContentPane().setLayout(null);
 		this.setBounds(100, 100, 400, 300);
-		JLabel lblNewLabel = new JLabel("Marque");
-		lblNewLabel.setForeground(Color.WHITE);
-		lblNewLabel.setBackground(Color.WHITE);
-		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 13));
-		lblNewLabel.setBounds(73, 55, 61, 13);
-		getContentPane().add(lblNewLabel);
+		JLabel lblMarque = new JLabel("Marque");
+		lblMarque.setForeground(Color.WHITE);
+		lblMarque.setBackground(Color.WHITE);
+		lblMarque.setFont(new Font("Tahoma", Font.BOLD, 13));
+		lblMarque.setBounds(73, 55, 61, 13);
+		getContentPane().add(lblMarque);
 
-		JLabel lblNewLabel_1 = new JLabel("Couleur");
-		lblNewLabel_1.setForeground(Color.WHITE);
-		lblNewLabel_1.setFont(new Font("Tahoma", Font.BOLD, 13));
-		lblNewLabel_1.setBounds(73, 144, 61, 13);
-		getContentPane().add(lblNewLabel_1);
+		JLabel lblCouleur = new JLabel("Couleur");
+		lblCouleur.setForeground(Color.WHITE);
+		lblCouleur.setFont(new Font("Tahoma", Font.BOLD, 13));
+		lblCouleur.setBounds(73, 144, 61, 13);
+		getContentPane().add(lblCouleur);
 
-		textField = new JTextField();
-		textField.setBounds(158, 53, 96, 19);
-		getContentPane().add(textField);
-		textField.setColumns(10);
+		textFieldMarque = new JTextField();
+		textFieldMarque.setBounds(158, 53, 96, 19);
+		getContentPane().add(textFieldMarque);
+		textFieldMarque.setColumns(10);
 
-		textField_1 = new JTextField();
-		textField_1.setBounds(158, 142, 96, 19);
-		getContentPane().add(textField_1);
-		textField_1.setColumns(10);
+		textFieldCouleur = new JTextField();
+		textFieldCouleur.setBounds(158, 142, 96, 19);
+		getContentPane().add(textFieldCouleur);
+		textFieldCouleur.setColumns(10);
 
-		JButton btnNewButton = new JButton("Ajouter");
-		btnNewButton.setBorderPainted(false);
-		btnNewButton.setBackground(new Color(246, 76, 114));
+		JButton btnAjouter = new JButton("Ajouter");
+		btnAjouter.setBorderPainted(false);
+		btnAjouter.setBackground(new Color(246, 76, 114));
 		addcommande adc = new addcommande();
 		addcar ac = this;
-		btnNewButton.addActionListener(new ActionListener() {
+		
+		/**
+		 * Lors de l'exécution du bouton "Ajouter" les données entrées seront inscrites dans la base de donnée.
+		 *
+		 */
+		btnAjouter.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
 					Class.forName("com.mysql.jdbc.Driver");
@@ -67,9 +83,9 @@ public class addcar extends JFrame {
 					conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/supercar", "root", "");
 					PreparedStatement st = conn
 							.prepareStatement("insert into voiture (couleur,modele,marque) values (?,?,?)");
-					st.setString(1, textField_1.getText());
-					st.setString(3, textField.getText());
-					st.setString(2, textField_2.getText());
+					st.setString(1, textFieldCouleur.getText());
+					st.setString(3, textFieldMarque.getText());
+					st.setString(2, textFieldModèle.getText());
 					st.execute();
 					adc.setVisible(true);
 					ac.dispose();
@@ -78,21 +94,25 @@ public class addcar extends JFrame {
 				}
 			}
 		});
-		btnNewButton.setBounds(127, 205, 110, 21);
-		getContentPane().add(btnNewButton);
+		btnAjouter.setBounds(127, 205, 110, 21);
+		getContentPane().add(btnAjouter);
 
-		textField_2 = new JTextField();
-		textField_2.setBounds(158, 101, 96, 19);
-		getContentPane().add(textField_2);
-		textField_2.setColumns(10);
+		textFieldModèle = new JTextField();
+		textFieldModèle.setBounds(158, 101, 96, 19);
+		getContentPane().add(textFieldModèle);
+		textFieldModèle.setColumns(10);
 
-		JLabel lblNewLabel_2 = new JLabel("Mod\u00E9le");
-		lblNewLabel_2.setForeground(Color.WHITE);
-		lblNewLabel_2.setFont(new Font("Tahoma", Font.BOLD, 13));
-		lblNewLabel_2.setBounds(73, 104, 61, 13);
-		getContentPane().add(lblNewLabel_2);
+		JLabel lblModèle = new JLabel("Modèle");
+		lblModèle.setForeground(Color.WHITE);
+		lblModèle.setFont(new Font("Tahoma", Font.BOLD, 13));
+		lblModèle.setBounds(73, 104, 61, 13);
+		getContentPane().add(lblModèle);
 	}
-
+	
+	/**
+	 * Permet d'exécuter la classe addcar lorsque celle-ci est appelée.
+	 *
+	 */
 	public static void main(String[] args) {
 		addcar adc = new addcar();
 		adc.setVisible(true);
